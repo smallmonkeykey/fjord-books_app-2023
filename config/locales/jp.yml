@@ -9,3 +9,5 @@ jp:
         memo: 内容
         author: 著者
         picture: 画像
+  show_this_book: この本をみる
+  new_book: 新しい本を追加する
