@@ -42,3 +42,6 @@ en:
         picture: Picture
   show_this_book: Show thih book
   new_book: New book
+  edit_this_book: Edit_this_book
+  back_to_books: Back_to_books
+  destroy_this_book: Destroy_this_book
