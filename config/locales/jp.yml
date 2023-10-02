@@ -2,7 +2,7 @@ jp:
   books: 書籍一覧
   activerecord:
     models:
-      book: 本
+      book: book
     attributes:
       book:
         title: タイトル
@@ -10,7 +10,12 @@ jp:
         author: 著者
         picture: 画像
   show_this_book: この本をみる
-  new_book: 新しい本を追加する
+  new_book: 新しい本を作成する
   edit_this_book: 編集する
   back_to_books: 書籍一覧に戻る
   destroy_this_book: 削除する
+  editing_book: 編集する
+  helpers:
+    submit:
+      create: 作成する
+      update: 更新する

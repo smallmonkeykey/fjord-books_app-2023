@@ -45,3 +45,8 @@ en:
   edit_this_book: Edit_this_book
   back_to_books: Back_to_books
   destroy_this_book: Destroy_this_book
+  editing_book: Editing book
+  helpers:
+    submit:
+      create: Create book
+      update: Update book
