@@ -50,3 +50,7 @@ en:
     submit:
       create: Create book
       update: Update book
+  notice:
+    create: Book was successfully created.
+    update: Book was successfully updated.
+    destroy: Book was successfully destroyed.
