@@ -2,7 +2,7 @@ jp:
   books: 書籍一覧
   activerecord:
     models:
-      book: 書籍一覧
+      book: 書籍
     attributes:
       book:
         title: タイトル
@@ -20,6 +20,6 @@ jp:
       create: 作成する
       update: 更新する
   notice:
-    create: 作成しました
-    update: 編集しました
-    destroy: 削除しました
+    create: "%{book}を作成しました"
+    update: "%{book}を編集しました"
+    destroy: "%{book}を削除しました"
