@@ -2,7 +2,7 @@ jp:
   books: 書籍一覧
   activerecord:
     models:
-      book: 本
+      book: 書籍一覧
     attributes:
       book:
         title: タイトル
