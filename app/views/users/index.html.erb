@@ -1,6 +1,5 @@
 <h1>ユーザーの一覧</h1>
 <p><% @users.each do |user| %>
   email: <%= user.email %><br>
-  introduction: <%= user.introduction %><br>
   <p><%= link_to '詳細',user_path((user.id)) %></p>
 <% end %></p>
