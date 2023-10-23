@@ -3,3 +3,4 @@
   email: <%= user.email %><br>
   <p><%= link_to '詳細',user_path((user.id)) %></p>
 <% end %></p>
+<%= paginate @users %>
