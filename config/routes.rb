@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :books
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   # get "users" => "users#index"
   # get 'users/:id/edit' => "users#edit"
   # Defines the root path route ("/")
