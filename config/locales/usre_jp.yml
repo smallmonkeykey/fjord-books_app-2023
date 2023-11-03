@@ -6,6 +6,7 @@ ja:
     logout: ログアウト
     signup: 登録する
     signin: ログイン
+    back: 戻る
 
 
   activerecord:
