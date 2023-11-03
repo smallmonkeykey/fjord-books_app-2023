@@ -1,0 +1,27 @@
+ja:
+  defaults:
+    books: 本の一覧
+    users: ユーザーの一覧
+    editprofile: プロフィールを編集する
+    logout: ログアウト
+    signup: 登録する
+    signin: ログイン
+
+
+  activerecord:
+    models:
+      user: ユーザー
+
+    attributes:
+      user:
+        email: メールアドレス
+        zip: 郵便番号
+        address: 住所
+        introduction: 自己紹介
+
+  users:
+    index:
+      users: ユーザーの一覧
+      detail: 詳細
+    show:
+     profile: プロフィール
