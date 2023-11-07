@@ -12,6 +12,8 @@ module BooksApp
     config.load_defaults 7.0
 
     config.active_storage.variant_processor = :mini_magick
+
+    config.time_zone = 'Tokyo'
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
