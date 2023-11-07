@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 class ReportsController < ApplicationController
+  before_action :set_report, only: %i[show edit update destroy]
 
   def index
     @reports = Report.order(:id).page(params[:page])
@@ -23,16 +26,11 @@ class ReportsController < ApplicationController
 		end
   end
 
-  def show
-    @report = Report.find(params[:id])
-  end
+  def show; end
 
-  def edit
-    @report = Report.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @report = Report.find(params[:id])
     respond_to do |format|
       if @report.update(report_params)
         format.html { redirect_to report_url(@report), notice: t('controllers.common.notice_update', name: Report.model_name.human) }
@@ -45,7 +43,6 @@ class ReportsController < ApplicationController
   end
 
   def destroy
-    @report = Report.find(params[:id])
     @report.destroy
 
     respond_to do |format|
@@ -55,6 +52,10 @@ class ReportsController < ApplicationController
   end
 
 	private
+
+  def set_report
+    @report = Report.find(params[:id])
+  end
 
   def report_params
     params.require(:report).permit(:title, :content)
