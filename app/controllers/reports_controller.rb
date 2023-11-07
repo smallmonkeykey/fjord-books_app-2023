@@ -44,6 +44,16 @@ class ReportsController < ApplicationController
     end
   end
 
+  def destroy
+    @report = Report.find(params[:id])
+    @report.destroy
+
+    respond_to do |format|
+      format.html { redirect_to reports_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human) }
+      format.json { head :no_content }
+    end
+  end
+
 	private
 
   def report_params
