@@ -1,9 +1,5 @@
 <h1>日報の一覧</h1>
 
-<nav class="page-nav">
-    <%= link_to '日報の新規作成', new_report_path %>
-</nav>
-
 <div id="reports" class="index-items">
   <% @reports.each do |report| %>
     <div class="index-item">
@@ -16,3 +12,7 @@
 </div>
 
 <%= paginate @reports %>
+
+<nav class="page-nav">
+    <%= link_to '日報の新規作成', new_report_path %>
+</nav>
