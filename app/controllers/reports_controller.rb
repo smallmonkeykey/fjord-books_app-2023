@@ -27,6 +27,23 @@ class ReportsController < ApplicationController
     @report = Report.find(params[:id])
   end
 
+  def edit
+    @report = Report.find(params[:id])
+  end
+
+  def update
+    @report = Report.find(params[:id])
+    respond_to do |format|
+      if @report.update(report_params)
+        format.html { redirect_to report_url(@report), notice: t('controllers.common.notice_update', name: Report.model_name.human) }
+        format.json { render :show, status: :ok, location: @report }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @report.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 	private
 
   def report_params
