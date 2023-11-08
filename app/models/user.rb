@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   has_many :reports
+  has_many :users, dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
