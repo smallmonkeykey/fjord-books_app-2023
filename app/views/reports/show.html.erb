@@ -14,4 +14,6 @@
   <% if current_user.id == @report.user_id %>
     <%= button_to t('views.common.destroy', name: Report.model_name.human.downcase), @report, method: :delete %>
   <% end %>
+
+	<%= link_to 'コメントする', new_report_comment_path(@report) %>
 </nav>
