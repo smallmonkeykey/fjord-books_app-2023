@@ -6,11 +6,18 @@ class CommentsController < ApplicationController
 	end
 
 	def create
-    @report = Report.find(params[:report_id])
-		@comment = @report.comments.create(comment_params)
-    @comment.user = current_user
+    # @report = Report.find(params[:report_id])
+		# @comment = @report.comments.create(comment_params)
+    # @comment.user = current_user
 
-    redirect_to report_path(@report)
+	@comment = @commentable.comments.new(comment_params)
+	@comment.user = current_user
+	@comment.save
+
+   if @comment.save
+       redirect_to report_path(@report)
+   end
+
   end
 
   private

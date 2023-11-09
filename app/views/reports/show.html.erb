@@ -17,3 +17,5 @@
 
 	<%= link_to 'コメントする', new_report_comment_path(@report) %>
 </nav>
+
+<%= render partial: 'comments/index', locals: {commentable: @report} %>
