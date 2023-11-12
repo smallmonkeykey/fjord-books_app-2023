@@ -25,7 +25,7 @@
     <%= user.self_introduction %>
   </p>
 
-  <% if user.image.attached? %>
+  <% if user.icon.attached? %>
     <p>
       <strong><%= User.human_attribute_name(:icon) %>:</strong>
       <%= image_tag user.image.variant(resize_to_limit: [100, 100]) %>
