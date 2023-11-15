@@ -1,22 +1,28 @@
 class CommentsController < ApplicationController
 
-	def new
-    @report = Report.find(params[:report_id])
-    @comment = Comment.new
-	end
+	# def new
+  #   @report = Report.find(params[:report_id])
+  #   @comment = Comment.new
+	# end
 
-	def create
-    # @report = Report.find(params[:report_id])
-		# @comment = @report.comments.create(comment_params)
-    # @comment.user = current_user
+	# def create
+  #   # @report = Report.find(params[:report_id])
+	# 	# @comment = @report.comments.create(comment_params)
+  #   # @comment.user = current_user
 
-	@comment = @commentable.comments.new(comment_params)
-	@comment.user = current_user
-	@comment.save
+	# @comment = @commentable.comments.new(comment_params)
+	# @comment.user = current_user
+	# @comment.save
 
-   if @comment.save
-       redirect_to report_path(@report)
-   end
+  #  if @comment.save
+  #      redirect_to report_path(@report)
+  #  end
+
+  def create
+    @comment = @commentable.comments.build(comment_params)
+    @comment.user = current_user
+    @comment.save
+    redirect_to @commentable
 
   end
 
