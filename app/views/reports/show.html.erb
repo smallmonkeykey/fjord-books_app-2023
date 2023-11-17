@@ -18,7 +18,7 @@
 </nav>
 
 <div>
-  <h2>コメントする</h2>
+  <h2><%= t('report.show.comment') %></h2>
   <%= render 'comments/form', commentable: @report, comment: @comment %>
 
   <%= render partial: 'comments/index', locals: {commentable: @report} %>

@@ -1,0 +1,8 @@
+ja:
+  report:
+    index:
+      title: 日報の一覧
+    new:
+      title: 日報の新規作成
+    show:
+      comment: コメントする

@@ -1,9 +1,9 @@
-<h1>日報の新規作成</h1>
+<h1><%= t('report.new.title') %></h1>
 
 <%= render "form", report: @report %>
 
 <br>
 
 <nav class="page-nav">
-  <%= link_to '日報の一覧に戻る', reports_path %>
+  <%= link_to t('report.index.title'), reports_path %>
 </nav>
