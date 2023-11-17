@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+   before_action :set_commentable
 
   def create
     @comment = @commentable.comments.build(comment_params)
@@ -11,6 +12,10 @@ class CommentsController < ApplicationController
   private
 	def comment_params
     params.require(:comment).permit(:content)
+  end
+
+  def set_commentable
+   raise NotImplementedError
   end
 
 end

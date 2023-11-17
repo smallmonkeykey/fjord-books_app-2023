@@ -1,5 +1,4 @@
 class Books::CommentsController < CommentsController
-  before_action :set_commentable
 
   private
 
