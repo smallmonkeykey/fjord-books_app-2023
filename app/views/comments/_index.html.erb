@@ -1,4 +1,9 @@
 <h3>comments</h3>
 <% commentable.comments.each do |comment| %>
 	<%= comment.content %>
+	<br>
+	<%= User.find(comment.user_id).name == "" ? User.find(comment.user_id).email : User.find(comment.user_id).name %>
+	<%= comment.created_at %>
+	<br>
+	<br>
 <% end %>
