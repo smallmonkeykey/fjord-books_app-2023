@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
-   before_action :set_commentable
+  before_action :set_commentable
 
   def create
     @comment = @commentable.comments.build(comment_params)
     @comment.user = current_user
     @comment.save
     redirect_to @commentable
-
   end
 
   def destroy
@@ -16,12 +17,12 @@ class CommentsController < ApplicationController
   end
 
   private
-	def comment_params
+
+  def comment_params
     params.require(:comment).permit(:content)
   end
 
   def set_commentable
-   raise NotImplementedError
+    raise NotImplementedError
   end
-
 end

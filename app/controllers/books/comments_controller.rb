@@ -1,5 +1,6 @@
-class Books::CommentsController < CommentsController
+# frozen_string_literal: true
 
+class Books::CommentsController < CommentsController
   private
 
   def set_commentable

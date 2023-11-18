@@ -8,11 +8,11 @@ class ReportsController < ApplicationController
     @reports = Report.order(:id).page(params[:page])
   end
 
-	def new
+  def new
     @report = Report.new
   end
 
-	def create
+  def create
     @user = current_user
     @report = @user.reports.create(report_params)
 
@@ -24,11 +24,11 @@ class ReportsController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @report.errors, status: :unprocessable_entity }
       end
-		end
+    end
   end
 
   def show
-     @comment = Comment.new
+    @comment = Comment.new
   end
 
   def edit; end
@@ -54,7 +54,7 @@ class ReportsController < ApplicationController
     end
   end
 
-	private
+  private
 
   def set_report
     @report = Report.find(params[:id])
@@ -67,5 +67,4 @@ class ReportsController < ApplicationController
   def correct_user
     redirect_to(root_url) unless @report.user_id == current_user.id
   end
-
 end
