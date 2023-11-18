@@ -6,5 +6,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :zip, numericality: { only_integer: true }, length: { is: 7 }
+  validates :zip, numericality: { only_integer: true }, length: { is: 7 }, allow_blank: true
 end
