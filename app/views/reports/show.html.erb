@@ -4,7 +4,9 @@
   <%= render @report %>
 </div>
 
-<%= render partial:'mentions/mention' %>
+<% if @report.mentioned_reports.exists? %>
+  <%= render partial:'mentions/mention' %>
+<% end %>
 
 <%= render 'shared/comments', commentable: @report %>
 
