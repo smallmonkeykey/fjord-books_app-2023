@@ -1,4 +1,4 @@
-<h4>この記事は以下の記事からリンクされてます</h4>
+<h4><%= t('mentions.mention.title') %></h4>
 <ul>
 <% @mentions.each do |mention| %>
  <li><%= link_to "#{Report.find(mention.mentioning_id).title}", "/reports/#{mention.mentioning_id}" %></li>
