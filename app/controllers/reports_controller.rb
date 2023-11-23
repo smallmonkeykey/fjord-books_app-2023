@@ -23,7 +23,7 @@ class ReportsController < ApplicationController
     @report = current_user.reports.new(report_params)
 
     if @report.save
-      matches = @report.content.scan(/http:\/\/localhost:3000\/reports\/(\d+)/)
+      matches = @report.content.scan(%r{http://localhost:3000/reports/(\d+)})
 
       matches.each do |match|
         Mention.create(mentioning_id: @report.id, mentioned_id: match[0].to_i)
@@ -37,17 +37,17 @@ class ReportsController < ApplicationController
 
   def update
     if @report.update(report_params)
-      new_data = @report.content.scan(/http:\/\/localhost:3000\/reports\/(\d+)/).flatten.sort
+      new_data = @report.content.scan(%r{http://localhost:3000/reports/(\d+)}).flatten.sort
       old_data = @report.mentioning_reports.all.pluck(:mentioned_id).sort
 
       unless old_data == new_data
-         @report.mentioning_reports.destroy_all
+        @report.mentioning_reports.destroy_all
 
-         matches = @report.content.scan(/http:\/\/localhost:3000\/reports\/(\d+)/)
+        matches = @report.content.scan(%r{http://localhost:3000/reports/(\d+)})
 
-         matches.each do |match|
-            Mention.create(mentioning_id: @report.id, mentioned_id: match[0].to_i)
-         end
+        matches.each do |match|
+          Mention.create(mentioning_id: @report.id, mentioned_id: match[0].to_i)
+        end
       end
       redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
