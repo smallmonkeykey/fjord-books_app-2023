@@ -1,0 +1,6 @@
+<h1><%= t('.users') %></h1>
+<p><% @users.each do |user| %>
+  <%= User.human_attribute_name(:email) %> <%= user.email %><br>
+  <p><%= link_to  t('.detail'),user_path((user.id)) %></p>
+<% end %></p>
+<%= paginate @users %>
