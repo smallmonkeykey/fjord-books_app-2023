@@ -2,6 +2,7 @@
 
 class CommentsController < ApplicationController
   before_action :set_commentable
+  before_action :correct_user, only: %i[destroy]
 
   def create
     @comment = @commentable.comments.build(comment_params)
@@ -24,5 +25,9 @@ class CommentsController < ApplicationController
 
   def set_commentable
     raise NotImplementedError
+  end
+
+  def correct_user
+    redirect_to(root_url) if @report.user_id != current_user.id
   end
 end
