@@ -53,6 +53,6 @@ class ReportsController < ApplicationController
   end
 
   def correct_user
-    redirect_to(root_url) unless @report.user_id == current_user.id
+    redirect_to(root_url) if @report.user_id != current_user.id
   end
 end
