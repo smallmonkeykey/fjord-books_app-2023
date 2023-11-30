@@ -1,0 +1,13 @@
+<h1><%= t('comment.index.comments') %></h1>
+<% commentable.comments.each do |comment| %>
+  <%= comment.content %>
+  <br>
+  <%= t('comment.index.poster') %>
+  <%= comment.user.display_name %>
+  <%= l comment.created_at, format: :short %>
+  <% if comment.user_id == current_user.id %>
+    <%= button_to  t('comment.index.destroy'), polymorphic_path([commentable, comment]), method: :delete %>
+  <% end %>
+  <br>
+  <br>
+<% end %>
