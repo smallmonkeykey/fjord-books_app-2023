@@ -20,21 +20,22 @@ class ReportsController < ApplicationController
   def edit; end
 
   def create
-    @report = current_user.reports.new(report_params)
+      @report = current_user.reports.new(report_params)
 
-    if @report.save
-      matches = @report.content.scan(%r{http://localhost:3000/reports/(\d+)})
-
-      matches.each do |match|
-        if match[0].to_i != @report.id || (Report.select("id").pluck(:id) - [@report.id]).include?(match[0].to_i)
-          @report.mentioning.create(mentioned_id: match[0].to_i)
+      if @report.valid?
+        matches = @report.content.scan(%r{http://localhost:3000/reports/(\d+)})
+        ActiveRecord::Base.transaction do
+          @report.save!
+          matches.each do |match|
+            if match[0].to_i != @report.id || (Report.select("id").pluck(:id) - [@report.id]).include?(match[0].to_i)
+              @report.mentioning.create!(mentioned_id: match[0].to_i)
+            end
+          end
         end
+        redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
+      else
+        render :new, status: :unprocessable_entity
       end
-
-      redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
-    else
-      render :new, status: :unprocessable_entity
-    end
   end
 
   def update
