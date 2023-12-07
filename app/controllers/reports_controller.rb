@@ -9,7 +9,7 @@ class ReportsController < ApplicationController
 
   def show
     @report = Report.find(params[:id])
-    @mentions = @report.mentioned_reports
+    @mentions = @report.mentioned
   end
 
   # GET /reports/new
@@ -26,9 +26,9 @@ class ReportsController < ApplicationController
       matches = @report.content.scan(%r{http://localhost:3000/reports/(\d+)})
 
       matches.each do |match|
-        Mention.create(mentioning_id: @report.id, mentioned_id: match[0].to_i)
+       @report.mentioning.create(mentioned_id: match[0].to_i)
       end
-
+   
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
       render :new, status: :unprocessable_entity
