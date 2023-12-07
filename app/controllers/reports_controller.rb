@@ -26,9 +26,11 @@ class ReportsController < ApplicationController
       matches = @report.content.scan(%r{http://localhost:3000/reports/(\d+)})
 
       matches.each do |match|
-       @report.mentioning.create(mentioned_id: match[0].to_i)
+        if match[0].to_i != @report.id || (Report.select("id").pluck(:id) - [@report.id]).include?(match[0].to_i)
+          @report.mentioning.create(mentioned_id: match[0].to_i)
+        end
       end
-   
+
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
       render :new, status: :unprocessable_entity
