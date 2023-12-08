@@ -1,6 +1,6 @@
 <h4><%= t('mentions.mention.title') %></h4>
 <ul>
 <% @mentions.each do |mention| %>
- <li><%= link_to "#{mention.mentioning.title}", "/reports/#{mention.mentioning.id}" %></li>
+ <li><%= link_to "#{mention.mentioning.title}", report_path(mention.mentioning.id) %></li>
 <% end %>
 </ul>
