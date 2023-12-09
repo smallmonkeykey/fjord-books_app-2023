@@ -20,17 +20,17 @@ class ReportsController < ApplicationController
   def edit; end
 
   def create
-      @report = current_user.reports.new(report_params)
+    @report = current_user.reports.new(report_params)
 
-      if @report.valid?
-        ActiveRecord::Base.transaction do
-          @report.save!
-          save_mention(extract_numbers)
-        end
-        redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
-      else
-        render :new, status: :unprocessable_entity
+    if @report.valid?
+      ActiveRecord::Base.transaction do
+        @report.save!
+        save_mention(extract_numbers)
       end
+      redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def update
@@ -63,8 +63,8 @@ class ReportsController < ApplicationController
 
   def save_mention(matches)
     matches.each do |match|
-      if match[0].to_i != @report.id || (Report.select("id").pluck(:id) - [@report.id]).include?(match[0].to_i)
-      @report.mentioning.create!(mentioned_id: match[0].to_i)
+      if match[0].to_i != @report.id || (Report.select('id').pluck(:id) - [@report.id]).include?(match[0].to_i)
+        @report.mentioning.create!(mentioned_id: match[0].to_i)
       end
     end
   end
