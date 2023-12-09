@@ -9,8 +9,7 @@ class ReportsController < ApplicationController
 
   def show
     @report = Report.find(params[:id])
-    @mentions = @report.mentioned
-
+    @mentions = @report.mentioned.preload(:mentioning)
   end
 
   # GET /reports/new
