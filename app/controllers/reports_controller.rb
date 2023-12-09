@@ -10,6 +10,7 @@ class ReportsController < ApplicationController
   def show
     @report = Report.find(params[:id])
     @mentions = @report.mentioned
+
   end
 
   # GET /reports/new
@@ -23,10 +24,9 @@ class ReportsController < ApplicationController
       @report = current_user.reports.new(report_params)
 
       if @report.valid?
-        matches = @report.content.scan(%r{http://localhost:3000/reports/(\d+)})
         ActiveRecord::Base.transaction do
           @report.save!
-          save_mention(matches)
+          save_mention(extract_numbers)
         end
         redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
       else
@@ -36,10 +36,9 @@ class ReportsController < ApplicationController
 
   def update
     if @report.update(report_params)
-      matches = @report.content.scan(%r{http://localhost:3000/reports/(\d+)})
       ActiveRecord::Base.transaction do
         @report.mentioning_reports.destroy_all
-        save_mention(matches)
+        save_mention(extract_numbers)
       end
       redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
@@ -69,5 +68,9 @@ class ReportsController < ApplicationController
       @report.mentioning.create!(mentioned_id: match[0].to_i)
       end
     end
+  end
+
+  def extract_numbers
+    @report.content.scan(%r{http://localhost:3000/reports/(\d+)})
   end
 end
