@@ -34,8 +34,9 @@ class ReportsController < ApplicationController
   end
 
   def update
-    if @report.update(report_params)
+    if @report.valid?
       ActiveRecord::Base.transaction do
+        @report.update!(report_params)
         @report.mentioning_reports.destroy_all
         save_mention(extract_numbers)
       end
