@@ -22,11 +22,7 @@ class ReportsController < ApplicationController
   def create
     @report = current_user.reports.new(report_params)
 
-    if @report.valid?
-      ActiveRecord::Base.transaction do
-        @report.save!
-        save_mention(extract_numbers)
-      end
+    if create_report
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
       render :new, status: :unprocessable_entity
@@ -34,12 +30,7 @@ class ReportsController < ApplicationController
   end
 
   def update
-    if @report.valid?
-      ActiveRecord::Base.transaction do
-        @report.update!(report_params)
-        @report.mentioning_reports.destroy_all
-        save_mention(extract_numbers)
-      end
+    if update_report
       redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
       render :edit, status: :unprocessable_entity
@@ -72,5 +63,22 @@ class ReportsController < ApplicationController
 
   def extract_numbers
     @report.content.scan(%r{http://localhost:3000/reports/(\d+)})
+  end
+
+  def create_report
+    ActiveRecord::Base.transaction do
+      @report.save!
+      save_mention(extract_numbers)
+    end
+    true
+  end
+
+  def update_report
+     ActiveRecord::Base.transaction do
+      @report.update!(report_params)
+      @report.mentioning_reports.destroy_all
+      save_mention(extract_numbers)
+     end
+     true
   end
 end
