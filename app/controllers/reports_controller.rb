@@ -55,14 +55,14 @@ class ReportsController < ApplicationController
 
   def save_mention(matches)
     matches.each do |match|
-      if match[0].to_i != @report.id || (Report.select('id').pluck(:id) - [@report.id]).include?(match[0].to_i)
-        @report.mentioning.create!(mentioned_id: match[0].to_i)
+      if match.to_i != @report.id || (Report.select('id').pluck(:id) - [@report.id]).include?(match.to_i)
+        @report.mentioning.create!(mentioned_id: match.to_i)
       end
     end
   end
 
   def extract_numbers
-    @report.content.scan(%r{http://localhost:3000/reports/(\d+)})
+    @report.content.scan(%r{http://localhost:3000/reports/(\d+)}).flatten
   end
 
   def create_report
