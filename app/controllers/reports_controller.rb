@@ -55,9 +55,10 @@ class ReportsController < ApplicationController
 
   def save_mention(matches)
     matches.each do |match|
-      if match.to_i != @report.id || (Report.select('id').pluck(:id) - [@report.id]).include?(match.to_i)
-        @report.mentioning.create!(mentioned_id: match.to_i)
-      end
+      report = @report.mentioning.build(mentioned_id: match.to_i)
+      next if report.invalid?
+
+      report.save!
     end
   end
 
