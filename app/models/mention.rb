@@ -8,6 +8,6 @@ class Mention < ApplicationRecord
   private
 
   def validate_not_same_id
-   errors.add('自分の日報を言及することはできません') if mentioning_id == mentioned_id
+    errors.add('自分の日報を言及することはできません') if mentioning_id == mentioned_id
   end
 end
