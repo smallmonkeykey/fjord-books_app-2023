@@ -68,17 +68,18 @@ class ReportsController < ApplicationController
 
   def create_report
     ActiveRecord::Base.transaction do
-      @report.save!
-      save_mention(extract_numbers)
+      if @report.save
+        save_mention(extract_numbers)
+      end
     end
     true
   end
 
   def update_report
     ActiveRecord::Base.transaction do
-      @report.update!(report_params)
-      @report.mentioning_reports.destroy_all
-      save_mention(extract_numbers)
+      if @report.update(report_params) && @report.mentioning_reports.destroy_all
+        save_mention(extract_numbers)
+      end
     end
     true
   end
