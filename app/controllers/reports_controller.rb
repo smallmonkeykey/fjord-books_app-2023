@@ -71,7 +71,6 @@ class ReportsController < ApplicationController
         save_mention(extract_numbers)
       end
     end
-    true
   end
 
   def update_report
@@ -80,6 +79,5 @@ class ReportsController < ApplicationController
         save_mention(extract_numbers)
       end
     end
-    true
   end
 end
