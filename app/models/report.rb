@@ -26,7 +26,7 @@ class Report < ApplicationRecord
   end
 
   def save_mention
-    matches =  Report.where(id: extract_numbers).where.not(id: id)
+    matches = Report.where(id: extract_numbers).where.not(id:)
 
     matches.each do |match|
       mentioning.create!(mentioned_id: match.id.to_i)
@@ -35,17 +35,13 @@ class Report < ApplicationRecord
 
   def create_report
     ActiveRecord::Base.transaction do
-      if save
-        save_mention
-      end
+      save_mention if save
     end
   end
 
   def update_report(report_params)
     ActiveRecord::Base.transaction do
-      if update(report_params) && self.mentioning_reports.destroy_all
-        save_mention
-      end
+      save_mention if update(report_params) && mentioning_reports.destroy_all
     end
   end
 
