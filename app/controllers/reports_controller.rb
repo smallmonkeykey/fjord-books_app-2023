@@ -22,7 +22,7 @@ class ReportsController < ApplicationController
   def create
     @report = current_user.reports.new(report_params)
 
-    if create_report
+    if @report.create_report
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
       render :new, status: :unprocessable_entity
@@ -30,7 +30,7 @@ class ReportsController < ApplicationController
   end
 
   def update
-    if update_report
+    if @report.update_report(report_params)
       redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
       render :edit, status: :unprocessable_entity
@@ -45,39 +45,11 @@ class ReportsController < ApplicationController
 
   private
 
-  def set_report
-    @report = current_user.reports.find(params[:id])
-  end
-
   def report_params
     params.require(:report).permit(:title, :content)
   end
 
-  def save_mention(matches)
-    matches =  Report.where(id: matches).where.not(id: @report.id)
-
-    matches.each do |match|
-      @report.mentioning.create!(mentioned_id: match.id.to_i)
-    end
-  end
-
-  def extract_numbers
-    @report.content.scan(%r{http://localhost:3000/reports/(\d+)}).flatten
-  end
-
-  def create_report
-    ActiveRecord::Base.transaction do
-      if @report.save
-        save_mention(extract_numbers)
-      end
-    end
-  end
-
-  def update_report
-    ActiveRecord::Base.transaction do
-      if @report.update(report_params) && @report.mentioning_reports.destroy_all
-        save_mention(extract_numbers)
-      end
-    end
+  def set_report
+    @report = current_user.reports.find(params[:id])
   end
 end

@@ -24,4 +24,34 @@ class Report < ApplicationRecord
   def created_on
     created_at.to_date
   end
+
+  def save_mention
+    matches =  Report.where(id: extract_numbers).where.not(id: id)
+
+    matches.each do |match|
+      mentioning.create!(mentioned_id: match.id.to_i)
+    end
+  end
+
+  def create_report
+    ActiveRecord::Base.transaction do
+      if save
+        save_mention
+      end
+    end
+  end
+
+  def update_report(report_params)
+    ActiveRecord::Base.transaction do
+      if update(report_params) && self.mentioning_reports.destroy_all
+        save_mention
+      end
+    end
+  end
+
+  private
+
+  def extract_numbers
+    content.scan(%r{http://localhost:3000/reports/(\d+)}).flatten
+  end
 end
