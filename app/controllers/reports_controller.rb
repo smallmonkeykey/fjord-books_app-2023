@@ -54,11 +54,10 @@ class ReportsController < ApplicationController
   end
 
   def save_mention(matches)
-    matches.each do |match|
-      report = @report.mentioning.build(mentioned_id: match.to_i)
-      next if report.invalid?
+    matches =  Report.where(id: matches).where.not(id: @report.id)
 
-      report.save!
+    matches.each do |match|
+      @report.mentioning.create!(mentioned_id: match.id.to_i)
     end
   end
 
