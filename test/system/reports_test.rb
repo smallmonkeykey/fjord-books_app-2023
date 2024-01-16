@@ -12,11 +12,6 @@ class ReportsTest < ApplicationSystemTestCase
     click_on 'ログイン'
   end
 
-  # test 'visiting the index' do
-  #   visit reports_url
-  #   assert_selector 'h1', text: 'Reports'
-  # end
-
   test 'should create report' do
     visit reports_url
     click_on '日報の新規作成'
