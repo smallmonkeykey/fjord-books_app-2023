@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+first_report:
   user: alice
-  title: MyString
-  content: MyText
+  title: 初めての日報
+  content: 今日からよろしくお願いします！
 
 # two:
 #   user: two
