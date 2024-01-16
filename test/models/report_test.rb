@@ -3,9 +3,9 @@
 require 'test_helper'
 
 class ReportTest < ActiveSupport::TestCase
-  test "#editable?" do
-    user = User.create!(email: 'a@example.com', password: 'password')
-    user2 = User.create!(email: 'b@example.com', password: 'password')
+  test "editable?" do
+    user =  users(:alice)
+    user2 = users(:bob)
     report = user.reports.create!(title: 'title', content: 'content')
 
     assert (report.user == user )
@@ -13,7 +13,7 @@ class ReportTest < ActiveSupport::TestCase
   end
   
   test "created_on" do
-    user = User.create!(email: 'a@example.com', password: 'password')
+    user = users(:alice)
     report = user.reports.create!(title: 'title', content: 'content')
     
     assert (report.created_on == user.created_at.strftime('%a, %d %b %Y').to_date)
