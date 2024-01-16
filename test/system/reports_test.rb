@@ -29,18 +29,17 @@ class ReportsTest < ApplicationSystemTestCase
     click_on '日報の一覧に戻る'
   end
 
-  # test 'should update Report' do
-  #   visit report_url(@report)
-  #   click_on 'Edit this report', match: :first
+  test 'should update Report' do
+    visit report_url(@report)
+    click_on 'この日報を編集'
 
-  #   fill_in 'Content', with: @report.content
-  #   fill_in 'Title', with: @report.title
-  #   fill_in 'User', with: @report.user_id
-  #   click_on 'Update Report'
+    fill_in 'タイトル', with: @report.title
+    fill_in '内容', with: @report.content
+    click_on '更新する'
 
-  #   assert_text 'Report was successfully updated'
-  #   click_on 'Back'
-  # end
+    assert_text '日報が更新されました。'
+    click_on '日報の一覧に戻る'
+  end
 
   # test 'should destroy Report' do
   #   visit report_url(@report)
