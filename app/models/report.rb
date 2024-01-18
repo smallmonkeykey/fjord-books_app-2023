@@ -33,13 +33,13 @@ class Report < ApplicationRecord
     end
   end
 
-  def save_self_and_mention
+  def save_with_mention
     ActiveRecord::Base.transaction do
       save_mention if save
     end
   end
 
-  def update_self_and_mention(report_params)
+  def update_with_mention(report_params)
     ActiveRecord::Base.transaction do
       save_mention if update(report_params) && mentioning_reports.destroy_all
     end
