@@ -30,13 +30,13 @@ class ReportsTest < ApplicationSystemTestCase
     visit report_url(@report)
     click_on 'この日報を編集'
 
-    fill_in 'タイトル', with: @report.title
-    fill_in '内容', with: @report.content
+    fill_in 'タイトル', with: '初めて投稿します'
+    fill_in '内容', with: 'よろしくお願いします'
     click_on '更新する'
 
     assert_text '日報が更新されました。'
-    assert_text @report.title
-    assert_text @report.content
+    assert_text '初めて投稿します'
+    assert_text 'よろしくお願いします'
     click_on '日報の一覧に戻る'
   end
 
