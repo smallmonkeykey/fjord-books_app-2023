@@ -6,10 +6,10 @@ class ReportTest < ActiveSupport::TestCase
   test 'editable?' do
     alice =  users(:alice)
     bob = users(:bob)
-    report = user.reports.create!(title: 'title', content: 'content')
+    report = alice.reports.create!(title: 'title', content: 'content')
 
-    assert(report.user == alice)
-    assert_not(report.user == bob)
+    assert(report.editable?(alice))
+    assert_not(report.editable?(bob))
   end
 
   test 'created_on' do
