@@ -16,6 +16,6 @@ class ReportTest < ActiveSupport::TestCase
     user = users(:alice)
     report = user.reports.create!(title: 'title', content: 'content')
 
-    assert(report.created_on == user.created_at.strftime('%a, %d %b %Y').to_date)
+    assert_equal(report.created_on , user.created_at.to_date)
   end
 end
