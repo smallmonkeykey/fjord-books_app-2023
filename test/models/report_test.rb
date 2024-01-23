@@ -4,12 +4,12 @@ require 'test_helper'
 
 class ReportTest < ActiveSupport::TestCase
   test 'editable?' do
-    user =  users(:alice)
-    user2 = users(:bob)
+    alice =  users(:alice)
+    bob = users(:bob)
     report = user.reports.create!(title: 'title', content: 'content')
 
-    assert(report.user == user)
-    assert_not(report.user == user2)
+    assert(report.user == alice)
+    assert_not(report.user == bob)
   end
 
   test 'created_on' do
