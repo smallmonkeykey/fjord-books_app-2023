@@ -4,7 +4,7 @@ require 'test_helper'
 
 class ReportTest < ActiveSupport::TestCase
   test 'editable?' do
-    alice =  users(:alice)
+    alice = users(:alice)
     bob = users(:bob)
     report = alice.reports.create!(title: 'title', content: 'content')
 
@@ -16,6 +16,6 @@ class ReportTest < ActiveSupport::TestCase
     user = users(:alice)
     report = user.reports.create!(title: 'title', content: 'content')
 
-    assert_equal(report.created_on , user.created_at.to_date)
+    assert_equal(report.created_on, user.created_at.to_date)
   end
 end

@@ -44,11 +44,11 @@ class ReportsTest < ApplicationSystemTestCase
   end
 
   test 'should destroy Report' do
-    assert Report.find_by(id:@report.id).present?
+    assert Report.find_by(id: @report.id).present?
     visit report_url(@report)
     click_on 'この日報を削除'
 
     assert_text '日報が削除されました。'
-    assert_not Report.find_by(id:@report.id).present?
+    assert_not Report.find_by(id: @report.id).present?
   end
 end
