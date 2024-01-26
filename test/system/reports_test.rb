@@ -44,14 +44,14 @@ class ReportsTest < ApplicationSystemTestCase
   end
 
   test 'should destroy Report' do
-    assert Report.find_by(id: @report.id).present?
     click_on '日報'
     assert_selector 'h1', text: '日報の一覧'
+    assert_text '初めての日報'
     click_link 'この日報を表示', href: report_path(@report)
     assert_selector 'h1', text: '日報の詳細'
     click_on 'この日報を削除'
 
     assert_text '日報が削除されました。'
-    assert_not Report.find_by(id: @report.id).present?
+    assert_no_text '初めての日報'
   end
 end
